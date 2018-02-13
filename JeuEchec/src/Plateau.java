@@ -1,9 +1,21 @@
+import java.util.HashMap;
+
 public class Plateau {
 
     private Case[][] plateau = new Case[8][8];
     private String[] xLetters = {"A", "B", "C", "D", "E", "F", "G", "H"};
     private String[] yNum = {"8", "7", "6", "5", "4", "3", "2", "1"};
+    private HashMap<String, Integer> xPos = new HashMap<>();
+    private HashMap<String, Integer> yPos = new HashMap<>();
 
+    public HashMap<String, Integer> yMap() {
+    	return yPos;
+    }
+    
+    public HashMap<String, Integer> xMap() {
+    	return xPos;
+    }
+    
     public String[] getxLetters() {
         return xLetters;
     }
@@ -20,6 +32,15 @@ public class Plateau {
         initPlateau();
     }
 
+    public void initMap() {
+        for (Integer i = 0; i < xLetters.length; i++) {
+            xPos.put(xLetters[i], i);
+        }
+        for (Integer j = 0; j < yNum.length; j++) {
+            yPos.put(yNum[j], j);
+        }
+    }
+    
     public void initPlateau() {
         // Initialise le plateau de jeu, 8x8 objet Case
         for(int i = 0; i < plateau.length; i++) {
