@@ -27,8 +27,7 @@ public class Deplacement {
 
     public void oldDeplacement(Plateau p) {
     	Input input = new Input();
-        System.out.print("Veuillez saisir la pièce à déplacer sous forme A8 (Lettre majuscule et chiffre) :");
-        String deplacement = input.getInput();
+        String deplacement = input.getInput("Veuillez saisir la pièce à déplacer sous forme A8 (Lettre majuscule et chiffre) :");
 
         // Check si la commande rentrée est une string de 2 caractères
         if (deplacement.length() == 2) {
@@ -52,8 +51,7 @@ public class Deplacement {
 
     public void newDeplacement(Plateau p) {
     	Input input = new Input();
-        System.out.print("Veuillez saisir la nouvelle position :");
-        String deplacement = input.getInput();
+        String deplacement = input.getInput("Veuillez saisir la nouvelle position :");
 
         if (deplacement.length() == 2) {
         	

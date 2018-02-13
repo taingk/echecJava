@@ -6,11 +6,8 @@ public class Jeu {
         System.out.println("Bienvenue sur le jeu d'échecs");
         boolean start = false;
 
-        System.out.println("[1] Lancer le jeu");
-        System.out.println("[0] Quitter le jeu");
-
         while (!start) {
-            String choice = input.getInput();
+            String choice = input.getInput("[1] Lancer le jeu \n[0] Quitter le jeu");
 
             if (choice.equals("1")) {
                 start = true;
