@@ -1,6 +1,8 @@
 public class Deplacement {
     private String name;
     private Integer team;
+    private String oldLetter;
+    private String oldNumber;
     
     public void collision(Plateau p, String oldN, String oldL) {
         Integer l = p.xMap().get(oldL);
@@ -33,7 +35,9 @@ public class Deplacement {
         if (deplacement.length() == 2) {
             String oldL = deplacement.substring(0, 1);
             String oldN = deplacement.substring(1, 2);
-
+            oldLetter = oldL;
+            oldNumber = oldN;
+            
             if (p.xMap().containsKey(oldL) && p.yMap().containsKey(oldN)) {
                 if (p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece() != null && p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece() != null) {
                     name = p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece().getName();
@@ -57,31 +61,20 @@ public class Deplacement {
         	
             String newL = deplacement.substring(0, 1);
             String newN = deplacement.substring(1, 2);
-            
-            if (p.xMap().containsKey(newL) && p.yMap().containsKey(newN)) {
-                switch (name) {
-                    case "Pion":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Pion(team));
-                        break;
-                    case "Tour":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Tour(team));
-                        break;
-                    case "Cavalier":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Cavalier(team));
-                        break;
-                    case "Fou":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Fou(team));
-                        break;
-                    case "Reine":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Reine(team));
-                        break;
-                    case "Roi":
-                        p.getPlateau()[p.yMap().get(newN)][p.xMap().get(newL)].setPiece(new Roi(team));
-                        break;
-                    default:
-                        break;
-                }
-                return;
+
+            if (!oldLetter.equals(newL) || !oldNumber.equals(newN)) {
+
+            	if (p.xMap().containsKey(newL) && p.yMap().containsKey(newN)) {
+            		Integer oldN = p.yMap().get(oldNumber);
+            		Integer oldL = p.xMap().get(oldLetter);
+
+            		if (p.getPlateau()[oldN][oldL].getPiece() != null) {
+            			
+            		}
+
+            		p.createPiece(name, team, newN, newL);
+            		return;
+            	}            	
             }
         }
         System.out.println("Mauvaise commande");

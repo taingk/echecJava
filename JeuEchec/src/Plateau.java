@@ -109,4 +109,31 @@ public class Plateau {
         }
         System.out.println();
     }
+    
+    public void createPiece(String name, Integer team, String newN, String newL) {
+		switch (name) {
+		case "Pion":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Pion(team));
+			break;
+		case "Tour":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Tour(team));
+			break;
+		case "Cavalier":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Cavalier(team));
+			break;
+		case "Fou":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Fou(team));
+			break;
+		case "Reine":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Reine(team));
+			break;
+		case "Roi":
+			getPlateau()[yMap().get(newN)][xMap().get(newL)].setPiece(new Roi(team));
+			break;
+		default:
+			break;
+		}
+
+    }
+
 }
