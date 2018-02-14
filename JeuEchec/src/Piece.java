@@ -1,9 +1,10 @@
 public class Piece {
     private String name;
     private Integer team;
+    private Integer nbCase;
 
     public Piece() {
-
+    		
     }
 
     public Piece(String name, Integer team) {
@@ -18,5 +19,20 @@ public class Piece {
     public int getTeam() {
         return team;
     }
+    
+    
+	public boolean checkCollision(Plateau p, Integer n, Integer l) {
+		return false;
+	}
+
+	public Integer getNbCase() {
+		return nbCase;
+	}
+
+	public void setNbCase(Integer nbCase) {
+		this.nbCase = nbCase;
+	}
+	
+
 
 }
