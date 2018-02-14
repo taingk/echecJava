@@ -17,8 +17,7 @@ public class Pion extends Piece {
 		{
 			System.out.println("Vous avez rencontré un obsctacle");
 			return true;
-		} 
-		else {
+		} else {
 			return false;
 		}
 	}

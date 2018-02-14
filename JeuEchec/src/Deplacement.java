@@ -4,7 +4,7 @@ public class Deplacement {
     private String oldLetter;
     private String oldNumber;
     
-    public void collision(Plateau p, String oldN, String oldL) {
+    public boolean collision(Plateau p, String oldN, String oldL) {
         Integer l = p.getxPos().get(oldL);
         Integer n = p.getyPos().get(oldN);
 
@@ -12,7 +12,7 @@ public class Deplacement {
             return true;
         }
         else {
-        		return false;
+        	return false;
         }
     }
 
@@ -35,8 +35,8 @@ public class Deplacement {
                     if (collision(p, oldN, oldL)) {
                     	oldDeplacement(p);
                     } else {
-                      p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].setPiece(null);
-                      return;
+                    	p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].setPiece(null);
+                    	return;
                     }
                 }
             }
