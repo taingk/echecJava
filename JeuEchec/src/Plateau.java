@@ -8,11 +8,11 @@ public class Plateau {
     private HashMap<String, Integer> xPos = new HashMap<>();
     private HashMap<String, Integer> yPos = new HashMap<>();
 
-    public HashMap<String, Integer> yMap() {
+    public HashMap<String, Integer> getyPos() {
     	return yPos;
     }
     
-    public HashMap<String, Integer> xMap() {
+    public HashMap<String, Integer> getxPos() {
     	return xPos;
     }
     
@@ -31,15 +31,6 @@ public class Plateau {
     public Plateau() {
         initPlateau();
     }
-
-    public void initMap() {
-        for (Integer i = 0; i < xLetters.length; i++) {
-            xPos.put(xLetters[i], i);
-        }
-        for (Integer j = 0; j < yNum.length; j++) {
-            yPos.put(yNum[j], j);
-        }
-    }
     
     public void initPlateau() {
         // Initialise le plateau de jeu, 8x8 objet Case
@@ -49,32 +40,33 @@ public class Plateau {
             }
         }
 
-        // Place les pions sur le plateau[1] et [6]
+        // Place les pions sur le plateau ligne 1 et 6 pour les team 0 et 1
         for (int i = 0; i < plateau.length; i++) {
             plateau[1][i].setPiece(new Pion(0));
             plateau[2][i].setPiece(new Pion(0));
             plateau[6][i].setPiece(new Pion(1));
         }
 
-        // Place les autres pions selon l'ordre de la team 0
-        plateau[0][0].setPiece(new Tour(0));
-        plateau[0][1].setPiece(new Cavalier(0));
-        plateau[0][2].setPiece(new Fou(0));
-        plateau[0][3].setPiece(new Reine(0));
-        plateau[0][4].setPiece(new Roi(0));
-        plateau[0][5].setPiece(new Fou(0));
-        plateau[0][6].setPiece(new Cavalier(0));
-        plateau[0][7].setPiece(new Tour(0));
-
-        // Place les autres pions selon l'ordre de la team 1
-        plateau[7][0].setPiece(new Tour(1));
-        plateau[7][1].setPiece(new Cavalier(1));
-        plateau[7][2].setPiece(new Fou(1));
-        plateau[7][3].setPiece(new Reine(1));
-        plateau[7][4].setPiece(new Roi(1));
-        plateau[7][5].setPiece(new Fou(1));
-        plateau[7][6].setPiece(new Cavalier(1));
-        plateau[7][7].setPiece(new Tour(1));
+        // Place les pièces restantes pour les teams 0 et 1
+        for (int i = 0, j = 0; i < 2; i++, j = j + 7) {
+            plateau[j][0].setPiece(new Tour(i));
+            plateau[j][1].setPiece(new Cavalier(i));
+            plateau[j][2].setPiece(new Fou(i));
+            plateau[j][3].setPiece(new Reine(i));
+            plateau[j][4].setPiece(new Roi(i));
+            plateau[j][5].setPiece(new Fou(i));
+            plateau[j][6].setPiece(new Cavalier(i));
+            plateau[j][7].setPiece(new Tour(i));
+        }
+        
+        // Initialise hashmap, les lettres et numéros du plateau sont liés 
+        // aux positions "code". A8 devient plateau[0][0]
+        for (Integer i = 0; i < xLetters.length; i++) {
+            xPos.put(xLetters[i], i);
+        }
+        for (Integer j = 0; j < yNum.length; j++) {
+            yPos.put(yNum[j], j);
+        }
     }
 
     public void displayPlateau() {
@@ -109,4 +101,31 @@ public class Plateau {
         }
         System.out.println();
     }
+    
+    public void createPiece(String name, Integer team, String newN, String newL) {
+		switch (name) {
+		case "Pion":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Pion(team));
+			break;
+		case "Tour":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Tour(team));
+			break;
+		case "Cavalier":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Cavalier(team));
+			break;
+		case "Fou":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Fou(team));
+			break;
+		case "Reine":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Reine(team));
+			break;
+		case "Roi":
+			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Roi(team));
+			break;
+		default:
+			break;
+		}
+
+    }
+
 }
