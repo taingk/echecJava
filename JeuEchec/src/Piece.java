@@ -1,8 +1,10 @@
+import java.util.HashMap;
+
 public class Piece {
     private String name;
     private Integer team;
     private Integer nbCase;
-
+    
     public Piece() {
     		
     }
@@ -16,15 +18,10 @@ public class Piece {
         return name;
     }
 
-    public int getTeam() {
+    public Integer getTeam() {
         return team;
     }
     
-    
-	public boolean checkCollision(Plateau p, Integer n, Integer l) {
-		return false;
-	}
-
 	public Integer getNbCase() {
 		return nbCase;
 	}
@@ -33,6 +30,12 @@ public class Piece {
 		this.nbCase = nbCase;
 	}
 	
+	public boolean checkCollision(Plateau p, Integer row, Integer col) {
+		return false;
+	}
 
-
+	public boolean checkAround(Plateau p, Integer row, Integer col) {
+		return false;
+	}
+	
 }

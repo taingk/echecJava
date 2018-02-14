@@ -5,21 +5,22 @@ public class Pion extends Piece {
 	}
 
 	@Override
-	public boolean checkCollision(Plateau p, Integer n, Integer l) {
+	public boolean checkCollision(Plateau p, Integer row, Integer col) {
 		
-		if (n + 1 > p.getPlateau().length && // vérifie les côter si n'est pas en dehors du tableau
-	    		l + 1 > p.getPlateau().length &&
-	    		n - 1 > p.getPlateau().length &&
-	    		l - 1 > p.getPlateau().length ){
-	    		return false;
-		}
-		else if (p.getPlateau()[n + 1][l].getPiece() != null) // si devant n'est pas null
-		{
-			System.out.println("Vous avez rencontré un obsctacle");
-			return true;
+		if (this.getTeam().equals(0)) {			
+			if (p.getPiece(row + 1, col) != null) {
+				System.out.println("Vous avez rencontre un obsctacle");
+				return true;
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			if (p.getPiece(row - 1, col) != null) {
+				System.out.println("Vous avez rencontre un obsctacle");
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
-
 }

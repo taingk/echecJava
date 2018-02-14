@@ -3,25 +3,25 @@ import java.util.HashMap;
 public class Plateau {
 
     private Case[][] plateau = new Case[8][8];
-    private String[] xLetters = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    private String[] yNum = {"8", "7", "6", "5", "4", "3", "2", "1"};
-    private HashMap<String, Integer> xPos = new HashMap<>();
-    private HashMap<String, Integer> yPos = new HashMap<>();
+    private String[] aCol = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    private String[] aRow = {"8", "7", "6", "5", "4", "3", "2", "1"};
+    private HashMap<String, Integer> hCol = new HashMap<>();
+    private HashMap<String, Integer> hRow = new HashMap<>();
 
-    public HashMap<String, Integer> getyPos() {
-    	return yPos;
+    public HashMap<String, Integer> getHRow() {
+    	return hRow;
     }
     
-    public HashMap<String, Integer> getxPos() {
-    	return xPos;
+    public HashMap<String, Integer> getHCol() {
+    	return hCol;
     }
     
-    public String[] getxLetters() {
-        return xLetters;
+    public String[] getACol() {
+        return aCol;
     }
 
-    public String[] getyNum() {
-        return yNum;
+    public String[] getARow() {
+        return aRow;
     }
 
     public Case[][] getPlateau() {
@@ -30,6 +30,18 @@ public class Plateau {
 
     public Plateau() {
         initPlateau();
+    }
+    
+    public Piece getPiece(Integer row, Integer col) {
+    	return getPlateau()[row][col].getPiece();
+    }
+    
+    public void setPiece(Integer row, Integer col, Piece piece) {
+    	getPlateau()[row][col].setPiece(piece);
+    }
+    
+    public Case getPos(Integer row, Integer col) {
+    	return getPlateau()[row][col];
     }
     
     public void initPlateau() {
@@ -46,6 +58,7 @@ public class Plateau {
             plateau[2][i].setPiece(new Pion(0));
             plateau[6][i].setPiece(new Pion(1));
         }
+        
 
         // Place les pièces restantes pour les teams 0 et 1
         for (int i = 0, j = 0; i < 2; i++, j = j + 7) {
@@ -58,14 +71,17 @@ public class Plateau {
             plateau[j][6].setPiece(new Cavalier(i));
             plateau[j][7].setPiece(new Tour(i));
         }
-        
+
+        plateau[4][0].setPiece(new Cavalier(0));
+        plateau[4][3].setPiece(new Cavalier(0));
+
         // Initialise hashmap, les lettres et numéros du plateau sont liés 
         // aux positions "code". A8 devient plateau[0][0]
-        for (Integer i = 0; i < xLetters.length; i++) {
-            xPos.put(xLetters[i], i);
+        for (Integer i = 0; i < aCol.length; i++) {
+            hCol.put(aCol[i], i);
         }
-        for (Integer j = 0; j < yNum.length; j++) {
-            yPos.put(yNum[j], j);
+        for (Integer j = 0; j < aRow.length; j++) {
+            hRow.put(aRow[j], j);
         }
     }
 
@@ -77,9 +93,9 @@ public class Plateau {
         for(Integer i = 0; i < plateau.length; i++)
         {
             // Affiche les nums par lignes
-            System.out.printf("%s ", yNum[i]);
+            System.out.printf("%s ", aRow[i]);
 
-            // Affiche les pièces
+            // Affiche les pieces
             for(Integer j = 0; j < plateau.length; j++)
             {
                 if (plateau[i][j].getPiece() != null) {
@@ -94,33 +110,33 @@ public class Plateau {
             // Affiche les lettres par colonnes
             if (i.equals(7)) {
                 System.out.print("  ");
-                for (int k = 0; k < xLetters.length; k++) {
-                    System.out.printf("  %s  ", xLetters[k]);
+                for (int k = 0; k < aCol.length; k++) {
+                    System.out.printf("  %s  ", aCol[k]);
                 }
             }
         }
         System.out.println();
     }
     
-    public void createPiece(String name, Integer team, String newN, String newL) {
+    public void createPiece(String name, Integer team, Integer row, Integer col) {
 		switch (name) {
 		case "Pion":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Pion(team));
+			getPlateau()[row][col].setPiece(new Pion(team));
 			break;
 		case "Tour":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Tour(team));
+			getPlateau()[row][col].setPiece(new Tour(team));
 			break;
 		case "Cavalier":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Cavalier(team));
+			getPlateau()[row][col].setPiece(new Cavalier(team));
 			break;
 		case "Fou":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Fou(team));
+			getPlateau()[row][col].setPiece(new Fou(team));
 			break;
 		case "Reine":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Reine(team));
+			getPlateau()[row][col].setPiece(new Reine(team));
 			break;
 		case "Roi":
-			getPlateau()[yPos.get(newN)][xPos.get(newL)].setPiece(new Roi(team));
+			getPlateau()[row][col].setPiece(new Roi(team));
 			break;
 		default:
 			break;

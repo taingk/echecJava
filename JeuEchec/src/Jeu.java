@@ -3,7 +3,7 @@ public class Jeu {
 
     public void menu() {
     	Input input = new Input();
-        System.out.println("Bienvenue sur le jeu d'échecs");
+        System.out.println("Bienvenue sur le jeu d'echec");
         boolean start = false;
 
         while (!start) {
@@ -15,7 +15,7 @@ public class Jeu {
                 this.boucleJeu();
             } else if (choice.equals("0")) {
                 start = true;
-                System.out.println("A bientôt !");
+                System.out.println("A bientot !");
             } else {
                 System.out.println("Commande inconnue");
             }
@@ -27,8 +27,8 @@ public class Jeu {
         Deplacement d = new Deplacement();
         // Boucle de jeu
         p.displayPlateau();
-        d.oldDeplacement(p);
-        d.newDeplacement(p);
+        d.oldPosition(p);
+        d.newPosition(p);
         p.displayPlateau();
     }
 }
