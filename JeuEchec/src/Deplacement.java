@@ -8,24 +8,13 @@ public class Deplacement {
         Integer l = p.getxPos().get(oldL);
         Integer n = p.getyPos().get(oldN);
 
-//        if (collisionAround(p, n, l)) {
-//            System.out.println("Je suis entouré");
-//        }
+        if (p.getPlateau()[n][l].getPiece().checkCollision(p, n, l)) {
+            return true;
+        }
+        else {
+        		return false;
+        }
     }
-
-//    public boolean collisionAround(Plateau p, Integer n, Integer l) {
-//        if (p.getPlateau()[ n - 1 ][l].getPiece() != null)
-//        //        &&
-//          //      p.getPlateau()[ n + 1 ][l].getPiece() != null &&
-//            //    p.getPlateau()[ n ][l - 1].getPiece() != null &&
-//              //  p.getPlateau()[ n ][l + 1].getPiece() != null)
-//        {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
 
     public void oldDeplacement(Plateau p) {
     	Input input = new Input();
@@ -43,9 +32,12 @@ public class Deplacement {
                     name = p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece().getName();
                     team = p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece().getTeam();
 
-                    collision(p, oldN, oldL);
-                    p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].setPiece(null);
-                    return;
+                    if (collision(p, oldN, oldL)) {
+                    	oldDeplacement(p);
+                    } else {
+                      p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].setPiece(null);
+                      return;
+                    }
                 }
             }
         }
