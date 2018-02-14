@@ -5,8 +5,8 @@ public class Deplacement {
     private String oldNumber;
     
     public void collision(Plateau p, String oldN, String oldL) {
-        Integer l = p.xMap().get(oldL);
-        Integer n = p.yMap().get(oldN);
+        Integer l = p.getxPos().get(oldL);
+        Integer n = p.getyPos().get(oldN);
 
 //        if (collisionAround(p, n, l)) {
 //            System.out.println("Je suis entouré");
@@ -38,13 +38,13 @@ public class Deplacement {
             oldLetter = oldL;
             oldNumber = oldN;
             
-            if (p.xMap().containsKey(oldL) && p.yMap().containsKey(oldN)) {
-                if (p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece() != null && p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece() != null) {
-                    name = p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece().getName();
-                    team = p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].getPiece().getTeam();
+            if (p.getxPos().containsKey(oldL) && p.getyPos().containsKey(oldN)) {
+                if (p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece() != null && p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece() != null) {
+                    name = p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece().getName();
+                    team = p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].getPiece().getTeam();
 
                     collision(p, oldN, oldL);
-                    p.getPlateau()[p.yMap().get(oldN)][p.xMap().get(oldL)].setPiece(null);
+                    p.getPlateau()[p.getyPos().get(oldN)][p.getxPos().get(oldL)].setPiece(null);
                     return;
                 }
             }
@@ -64,14 +64,16 @@ public class Deplacement {
 
             if (!oldLetter.equals(newL) || !oldNumber.equals(newN)) {
 
-            	if (p.xMap().containsKey(newL) && p.yMap().containsKey(newN)) {
-            		Integer oldN = p.yMap().get(oldNumber);
-            		Integer oldL = p.xMap().get(oldLetter);
+            	if (p.getxPos().containsKey(newL) && p.getyPos().containsKey(newN)) {
+            		Integer row = p.getyPos().get(newN);
+            		Integer col = p.getxPos().get(newL);
 
-            		if (p.getPlateau()[oldN][oldL].getPiece() != null) {
+            		System.out.print(row + " " + col);
+            		
+            		if (p.getPlateau()[row][col].getPiece() != null) {
             			
             		}
-
+            		
             		p.createPiece(name, team, newN, newL);
             		return;
             	}            	

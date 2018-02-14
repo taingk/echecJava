@@ -25,7 +25,6 @@ public class Jeu {
     public void boucleJeu() {
         Plateau p = new Plateau();
         Deplacement d = new Deplacement();
-        p.initMap();
         // Boucle de jeu
         p.displayPlateau();
         d.oldDeplacement(p);
