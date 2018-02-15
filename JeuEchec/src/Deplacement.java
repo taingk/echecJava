@@ -13,8 +13,8 @@ public class Deplacement {
         if (deplacement.length() == 2) {
     		String colInput = deplacement.substring(0, 1);
     		String rowInput = deplacement.substring(1, 2);
-    		oldPosRow = rowInput;
     		oldPosCol = colInput;
+    		oldPosRow = rowInput;
     		
     		if (p.getHCol().containsKey(colInput) && p.getHRow().containsKey(rowInput)) {
     			Integer row = p.getHRow().get(rowInput);
@@ -50,24 +50,20 @@ public class Deplacement {
         if (deplacement.length() == 2) {
             String colInput = deplacement.substring(0, 1);
             String rowInput = deplacement.substring(1, 2);
-
-            if (!oldPosCol.equals(colInput) || !oldPosRow.equals(rowInput)) {
+            
+            if (!colInput.equals(oldPosCol) || !rowInput.equals(oldPosRow)) {
 
             	if (p.getHCol().containsKey(colInput) && p.getHRow().containsKey(rowInput)) {
             		Integer col = p.getHCol().get(colInput);
             		Integer row = p.getHRow().get(rowInput);
-           		            		
+
             		// Check si il mange / deplace possible sur cette position
             		p.createPiece(name, team, row, col);
-					checkDeplacement = true;
             		return;
             	}            	
             }
         }
-        
-        if (!checkDeplacement) {
-	        System.out.println("Mauvaise commande");
-	        newPosition(p);
-        }
+        System.out.println("Mauvaise commande");
+        newPosition(p);
     }
 }
