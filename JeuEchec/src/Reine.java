@@ -2,19 +2,7 @@ public class Reine extends Piece {
     public Reine (int team) {
         super("Reine", team);
     }
-    
-    @Override
-    public boolean checkCollision(Plateau p, Integer row, Integer col){ 
-	    	
-    	if (checkAround(p, row, col)) {
-			System.out.println("Vous avez rencontre un obsctacle");
-			return true;
-		} else {
-			return false;
-		}
-    	
-    }
-    
+        
 	@Override
 	public boolean checkAround(Plateau p, Integer row, Integer col) {
 		

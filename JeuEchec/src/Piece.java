@@ -29,10 +29,6 @@ public class Piece {
 	public void setNbCase(Integer nbCase) {
 		this.nbCase = nbCase;
 	}
-	
-	public boolean checkCollision(Plateau p, Integer row, Integer col) {
-		return false;
-	}
 
 	public boolean checkAround(Plateau p, Integer row, Integer col) {
 		return false;

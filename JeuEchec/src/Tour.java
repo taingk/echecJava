@@ -6,20 +6,8 @@ public class Tour extends Piece {
 	}
 
 	@Override
-    public boolean checkCollision(Plateau p, Integer row, Integer col){
-		
-		if (checkAround(p, row, col)) {
-			System.out.println("Vous avez rencontre un obsctacle");
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-	
-	@Override
 	public boolean checkAround(Plateau p, Integer row, Integer col) {
-		// Check seulement côté
+		// Check seulement cï¿½tï¿½
 		
 		// En haut a droite
 		if (col - 1 < 0 && row - 1 < 0) {

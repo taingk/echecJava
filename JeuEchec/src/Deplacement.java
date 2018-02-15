@@ -5,15 +5,6 @@ public class Deplacement {
     private String oldPosRow;
     private boolean checkDeplacement = false;
     
-    public boolean collision(Plateau p, Integer row, Integer col) {
-        if (p.getPlateau()[row][col].getPiece().checkCollision(p, row, col)) {
-            return true;
-        }
-        else {
-        	return false;
-        }
-    }
-
     public void oldPosition(Plateau p) {
     	Input input = new Input();
         String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
@@ -33,7 +24,8 @@ public class Deplacement {
     				name = p.getPiece(row, col).getName();
     				team = p.getPiece(row, col).getTeam();
     				
-    				if (collision(p, row, col)) {
+    				if (p.getPiece(row, col).checkAround(p, row, col)) {
+    					System.out.println("Vous avez rencontre un obsctacle");
     					oldPosition(p);
     				} else {
     					p.setPiece(row, col, null);
