@@ -9,7 +9,7 @@ public class Tour extends Piece {
 	public boolean checkAround(Plateau p, Integer row, Integer col) {
 		// Check seulement c�t�
 		
-		// En haut a droite
+		// En haut a gauche
 		if (col - 1 < 0 && row - 1 < 0) {
 			if (p.getPiece(row + 1, col) != null &&
 				p.getPiece(row, col + 1) != null) {
@@ -19,7 +19,7 @@ public class Tour extends Piece {
 			}
 		}
 		
-		// En haut a gauche
+		// En haut a droite
 		if (col + 1 > 7 && row - 1 < 0) {
 			if (p.getPiece(row + 1, col) != null &&
 				p.getPiece(row, col - 1) != null) {
