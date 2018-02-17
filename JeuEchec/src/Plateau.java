@@ -54,8 +54,8 @@ public class Plateau {
 
         // Place les pions sur le plateau ligne 1 et 6 pour les team 0 et 1
         for (int i = 0; i < plateau.length; i++) {
-            plateau[1][i].setPiece(new Pion(0, 1));
-            plateau[6][i].setPiece(new Pion(1, 1));
+            plateau[1][i].setPiece(new Pion(0, 2));
+            plateau[6][i].setPiece(new Pion(1, 2));
         }
         
 
@@ -117,7 +117,7 @@ public class Plateau {
     public void createPiece(String name, Integer team, Integer row, Integer col) {
 		switch (name) {
 		case "Pion":
-			getPlateau()[row][col].setPiece(new Pion(team, 1));
+			getPlateau()[row][col].setPiece(new Pion(team, 2));
 			break;
 		case "Tour":
 			getPlateau()[row][col].setPiece(new Tour(team));

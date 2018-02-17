@@ -1,87 +1,54 @@
 public class Deplacement {
-	private String name;
-	private Integer team;
-	private String oldPosCol;
-	private String oldPosRow;
-	private boolean checkDeplacement = false;
 
-	public void oldPosition(Plateau p) {
+	private boolean checkDeplacement = false;
+	
+	public void deplacement(Plateau p) {
+
 		Input input = new Input();
-		String deplacement = input
-				.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
+		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
 
 		// Check si la commande rentrée est une string de 2 caractères
 		if (deplacement.length() == 2) {
 			String colInput = deplacement.substring(0, 1);
 			String rowInput = deplacement.substring(1, 2);
-			oldPosCol = colInput;
-			oldPosRow = rowInput;
 
 			if (p.getHCol().containsKey(colInput) && p.getHRow().containsKey(rowInput)) {
-				Integer row = p.getHRow().get(rowInput);
-				Integer col = p.getHCol().get(colInput);
+				Integer oldCol = p.getHCol().get(colInput);
+				Integer oldRow = p.getHRow().get(rowInput);
+				
+				if (p.getPiece(oldRow, oldCol) != null) {
+					deplacement = input.getInput("Veuillez saisir la nouvelle position sous forme A8 (Lettre majuscule et chiffre) :");
 
-				if (p.getPiece(row, col) != null) {
-					name = p.getPiece(row, col).getName();
-					team = p.getPiece(row, col).getTeam();
+					if (deplacement.length() == 2) {
+						colInput = deplacement.substring(0, 1);
+						rowInput = deplacement.substring(1, 2);
 
-					if (p.getPiece(row, col).checkAround(p, row, col)) {
-						System.out.println("Vous avez rencontre un obsctacle");
-						oldPosition(p);
-					} else {
-						p.setPiece(row, col, null);
-						checkDeplacement = true;
-						return;
-					}
+						if (p.getHCol().containsKey(colInput) && p.getHRow().containsKey(rowInput)) {
+							Integer col = p.getHCol().get(colInput);
+							Integer row = p.getHRow().get(rowInput);
+
+							if (!col.equals(oldCol) || !row.equals(oldRow)) {
+								
+								if (p.getPiece(oldRow, oldCol).checkValidDeplacement(p, row, col, oldRow, oldCol)) {
+									checkDeplacement = true;
+									p.createPiece(p.getPiece(oldRow, oldCol).getName(), p.getPiece(oldRow, oldCol).getTeam(), row, col);
+									p.setPiece(oldRow, oldCol, null);
+									return;
+									
+								} else {
+									System.out.println("Mauvaise commande");
+									deplacement(p);
+									
+								}
+							}
+						}
+					}			
 				}
 			}
 		}
-
 		if (!checkDeplacement) {
 			System.out.println("Mauvaise commande");
-			oldPosition(p);
+			deplacement(p);			
 		}
-
-	}
-
-	public void newPosition(Plateau p) {
-		Input input = new Input();
-		String deplacement = input.getInput("Veuillez saisir la nouvelle position :");
-
-		if (deplacement.length() == 2) {
-			String colInput = deplacement.substring(0, 1);
-			String rowInput = deplacement.substring(1, 2);
-
-			if (!colInput.equals(oldPosCol) || !rowInput.equals(oldPosRow)) {
-
-				if (p.getHCol().containsKey(colInput) && p.getHRow().containsKey(rowInput)) {
-					Integer col = p.getHCol().get(colInput);
-					Integer row = p.getHRow().get(rowInput);
-					Integer oldRow = p.getHRow().get(oldPosRow);
-					Integer oldCol = p.getHCol().get(oldPosCol);
-
-					// if(p.getPiece(row, col).checkValidDeplacement(row, col, p, team, null) ==
-					// true) {
-					// newPosition(p);
-					// }else {
-					// return;1
-					
-					// }
-						
-					p.getPiece(row, col).checkValidDeplacement(p, row, col, oldRow, oldCol);
-//					if (p.getPiece(row, col).checkValidDeplacement(p, row, col, oldRow, oldCol)) {
-//						p.createPiece(name, team, row, col);
-//						return;
-//					} else {
-//						newPosition(p);
-//					}
-					
-					// Check si il mange / deplace possible sur cette position
-
-				}
-			}
-		}
-		System.out.println("Mauvaise commande");
-		newPosition(p);
 	}
 }

@@ -6,41 +6,96 @@ public class Pion extends Piece {
 	}
 
 	@Override
-	public boolean checkAround(Plateau p, Integer row, Integer col) {
-
-		if (this.getTeam().equals(0)) {
-			if (p.getPiece(row + 1, col) != null) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			if (p.getPiece(row - 1, col) != null) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	@Override
 	public boolean checkValidDeplacement(Plateau p, Integer row, Integer col, Integer oldRow, Integer oldCol) {
-		System.out.println("1");
-		int newRow = row - oldRow;
-
-		if (this.getTeam().equals(0)) {
-			if (newRow <= this.getNbCase()) {
-				System.out.println("test");
-				if (p.getPiece(row + 1, col) != null) {
-					return false;
+		Integer nbDestination;
+		
+	if (this.getTeam().equals(0)) {
+	
+		if (row > oldRow) {
+			nbDestination = row - oldRow;
+			
+			if (nbDestination <= this.getNbCase()) {
+				//Check si obstacle dans la trajectoire
+				if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
+					
+					if (p.getPiece(oldRow + nbDestination, oldCol) == null && col.equals(oldCol)) {
+						// Deplacement sur case vide
+						return true;
+					} else {
+						// Mange en diagonale l'ennemie
+						if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) && !(col).equals(oldCol)) {
+								return true;
+						}
+						// Bloque devant lui
+						System.out.println("Collision en face");
+						return false;
+					}
 				} else {
-					return true;
+					System.out.println("Collision");
+					return false;
+				}
+			} else {
+				System.out.println("Votre nombre de case est limite");				
+				return false;
+			}	
+		}
+		} else {
+			// team 1
+			if (row < oldRow) {
+				nbDestination = oldRow - row;
+				
+				if (nbDestination <= this.getNbCase()) {
+					if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
+						
+						if (p.getPiece(oldRow - nbDestination, oldCol) == null && col.equals(oldCol)) {
+							return true;
+						} else {
+							// Mange en diagonale l'ennemie
+							if (p.getPiece(oldRow - nbDestination, col) != null && p.getPiece(oldRow - nbDestination, col).getTeam().equals(0) && !(col).equals(oldCol)) {
+								return true;
+							}
+							// Bloque devant lui
+							System.out.println("Collision en face");
+							return false;
+						}
+					} else {
+						System.out.println("Collision");
+						return false;
+					}
+				} else {
+					System.out.println("Votre nombre de case est limite");				
+					return false;
 				}
 			}
-
-		} else {
-			System.out.println("Votre nombre de case est limité");
 		}
+		System.out.println("Deplacement impossible");
 		return false;
 	}
+	
+	@Override
+	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDesination) {
+		if (nbDesination.equals(1)) {
+			return true;
+		}
+		Integer finalRow;
+		
+		if (team.equals(0)) {
+			finalRow = oldRow + nbDesination;
+			for (int i = oldRow + 1; i < finalRow; i++) {
+				if (p.getPiece(i, oldCol) != null) {
+					return false;
+				}
+			}
+		} else {
+			finalRow = oldRow - nbDesination;
+			for (int i = oldRow - 1; i > finalRow; i--) {
+				if (p.getPiece(i, oldCol) != null) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+
 }

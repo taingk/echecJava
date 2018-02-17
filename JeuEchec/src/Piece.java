@@ -3,7 +3,8 @@ public class Piece {
     private String name;
     private Integer team;
     private Integer nbCase;
-    
+    private Integer row;
+    private Integer col;
 
     public Piece(String name, Integer team) {
         this.name = name;
@@ -32,12 +33,12 @@ public class Piece {
 		this.nbCase = nbCase;
 	}
 
-	public boolean checkAround(Plateau p, Integer row, Integer col) {
-		return false;
-	}
-	
 	public boolean checkValidDeplacement(Plateau p, Integer row, Integer col, Integer oldRow, Integer oldCol) {
 		return true;
 	}
-	
+
+	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination) {
+		return false;
+	}
+
 }

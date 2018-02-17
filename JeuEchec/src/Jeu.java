@@ -27,8 +27,7 @@ public class Jeu {
         Deplacement d = new Deplacement();
         // Boucle de jeu
         p.displayPlateau();
-        d.oldPosition(p);
-        d.newPosition(p);
+        d.deplacement(p);
         p.displayPlateau();
     }
 }
