@@ -9,36 +9,36 @@ public class Pion extends Piece {
 	public boolean checkValidDeplacement(Plateau p, Integer row, Integer col, Integer oldRow, Integer oldCol) {
 		Integer nbDestination;
 		
-	if (this.getTeam().equals(0)) {
-	
-		if (row > oldRow) {
-			nbDestination = row - oldRow;
-			
-			if (nbDestination <= this.getNbCase()) {
-				//Check si obstacle dans la trajectoire
-				if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
-					
-					if (p.getPiece(oldRow + nbDestination, oldCol) == null && col.equals(oldCol)) {
-						// Deplacement sur case vide
-						return true;
-					} else {
-						// Mange en diagonale l'ennemie
-						if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) && !(col).equals(oldCol)) {
-								return true;
+		if (this.getTeam().equals(0)) {
+		
+			if (row > oldRow) {
+				nbDestination = row - oldRow;
+				
+				if (nbDestination <= this.getNbCase()) {
+					//Check si obstacle dans la trajectoire
+					if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
+						
+						if (p.getPiece(oldRow + nbDestination, oldCol) == null && col.equals(oldCol)) {
+							// Deplacement sur case vide
+							return true;
+						} else {
+							// Mange en diagonale l'ennemie
+							if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) && !(col).equals(oldCol)) {
+									return true;
+							}
+							// Bloque devant lui
+							System.out.println("Collision en face");
+							return false;
 						}
-						// Bloque devant lui
-						System.out.println("Collision en face");
+					} else {
+						System.out.println("Collision");
 						return false;
 					}
 				} else {
-					System.out.println("Collision");
+					System.out.println("Votre nombre de case est limite");				
 					return false;
-				}
-			} else {
-				System.out.println("Votre nombre de case est limite");				
-				return false;
-			}	
-		}
+				}	
+			}
 		} else {
 			// team 1
 			if (row < oldRow) {
@@ -73,21 +73,21 @@ public class Pion extends Piece {
 	}
 	
 	@Override
-	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDesination) {
-		if (nbDesination.equals(1)) {
+	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination) {
+		if (nbDestination.equals(1)) {
 			return true;
 		}
 		Integer finalRow;
 		
 		if (team.equals(0)) {
-			finalRow = oldRow + nbDesination;
+			finalRow = oldRow + nbDestination;
 			for (int i = oldRow + 1; i < finalRow; i++) {
 				if (p.getPiece(i, oldCol) != null) {
 					return false;
 				}
 			}
 		} else {
-			finalRow = oldRow - nbDesination;
+			finalRow = oldRow - nbDestination;
 			for (int i = oldRow - 1; i > finalRow; i--) {
 				if (p.getPiece(i, oldCol) != null) {
 					return false;
