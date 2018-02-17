@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 public class Piece {
     private String name;
@@ -38,6 +39,10 @@ public class Piece {
 	}
 
 	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination) {
+		return false;
+	}
+
+	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination, HashMap<String, Integer> hDirection) {
 		return false;
 	}
 

@@ -7,7 +7,7 @@ public class Deplacement {
 		Input input = new Input();
 		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
 
-		// Check si la commande rentrée est une string de 2 caractères
+		// Check si la commande rentree est une string de 2 caracteres
 		if (deplacement.length() == 2) {
 			String colInput = deplacement.substring(0, 1);
 			String rowInput = deplacement.substring(1, 2);
