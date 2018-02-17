@@ -19,12 +19,12 @@ public class Pion extends Piece {
 					//Check si obstacle dans la trajectoire
 					if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
 						
-						if (p.getPiece(finalPos, oldCol) == null && col.equals(oldCol)) {
+						if (p.getPiece(oldRow + nbDestination, oldCol) == null && col.equals(oldCol)) {
 							// Deplacement sur case vide
 							return true;
 						} else {
 							// Mange en diagonale l'ennemie
-							if (p.getPiece(finalPos, col) != null && p.getPiece(finalPos, col).getTeam().equals(1) && !(col).equals(oldCol)) {
+							if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) && !(col).equals(oldCol)) {
 									return true;
 							}
 							// Bloque devant lui
@@ -48,11 +48,11 @@ public class Pion extends Piece {
 				if (nbDestination <= this.getNbCase()) {
 					if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination)) {
 						
-						if (p.getPiece(finalPos, oldCol) == null && col.equals(oldCol)) {
+						if (p.getPiece(oldRow - nbDestination, oldCol) == null && col.equals(oldCol)) {
 							return true;
 						} else {
 							// Mange en diagonale l'ennemie
-							if (p.getPiece(finalPos, col) != null && p.getPiece(finalPos, col).getTeam().equals(0) && !(col).equals(oldCol)) {
+							if (p.getPiece(oldRow - nbDestination, col) != null && p.getPiece(oldRow - nbDestination, col).getTeam().equals(0) && !(col).equals(oldCol)) {
 								return true;
 							}
 							// Bloque devant lui
