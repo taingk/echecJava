@@ -30,7 +30,7 @@ public class Jeu {
 
 		Integer player = 0;
 
-		while (checkKings(p).size() == 2){
+		while (checkKings(p).equals(2)){
 			p.displayPlateau();
 
 			if (player.equals(0)) {
@@ -42,29 +42,28 @@ public class Jeu {
 			d.deplacement(p, player);
 		}
 		
-		if(player.equals(0)){
-			System.out.println("Le player 1 à gagné la partie");	
-		}else{
-			System.out.println("Le player 2 à gagné la partie");
+		p.displayPlateau();
+
+		if (player.equals(0)) {
+			System.out.println("Le joueur 2 a�gagne la partie !");	
+		} else {
+			System.out.println("Le joueur 1 a gagne la partie !");
 		}
 	}
 
-	public ArrayList<Integer> checkKings(Plateau p) {
+	public Integer checkKings(Plateau p) {
+		Integer compteur = 0;
     	
-    		ArrayList<Integer> kings = new ArrayList<Integer>();
 		for(int i = 0; i < p.getPlateau().length; i++) {
             for(int j = 0; j < p.getPlateau().length; j++) {
-            		if(p.getPiece(i, j) != null) {
-            			if(p.getPiece(i, j).getName().equals("Roi")) {
-            				kings.add(i);
-            				
+            	if(p.getPiece(i, j) != null) {
+            		if(p.getPiece(i, j).getName().equals("Roi")) {
+            			compteur = compteur + 1;			
             		}
-
-            		}
-            	}
-         }
-            
-           
-            return kings;
+        		}
+            }
+        }
+		
+        return compteur;
 	}
 }

@@ -1,9 +1,7 @@
 public class Deplacement {
-
-	private boolean checkDeplacement = false;
 	
 	public void deplacement(Plateau p, Integer player) {
-
+		boolean checkDeplacement = false;
 		Input input = new Input();
 		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
 		
@@ -30,6 +28,7 @@ public class Deplacement {
 							if (!col.equals(oldCol) || !row.equals(oldRow)) {
 								
 								if (p.getPiece(oldRow, oldCol).checkValidDeplacement(p, row, col, oldRow, oldCol)) {
+									
 									checkDeplacement = true;
 									p.createPiece(p.getPiece(oldRow, oldCol).getName(), p.getPiece(oldRow, oldCol).getTeam(), row, col);
 									p.setPiece(oldRow, oldCol, null);

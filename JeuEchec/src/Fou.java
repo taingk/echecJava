@@ -7,8 +7,14 @@ public class Fou extends Piece {
     }
    
 	public boolean checkValidDeplacement(Plateau p, Integer row, Integer col, Integer oldRow, Integer oldCol) {
-	    String direction = null;
-		Integer nbDestination = null;
+		if (row.equals(oldRow) && !col.equals(oldCol)) {
+			return false;
+		} else if (!row.equals(oldRow) && col.equals(oldCol)) {
+			return false;
+		}
+
+		String direction;
+		Integer nbDestination;
 
 		if (oldRow < row && oldCol < col) {
 			if (!(row - oldRow == col - oldCol)) {
@@ -16,25 +22,19 @@ public class Fou extends Piece {
 			}
 			nbDestination = row - oldRow;
 			direction = "bas droite";
-		}
-		
-		if (oldRow > row && oldCol > col) {
+		} else if (oldRow > row && oldCol > col) {
 			if (!(row + oldRow == col + oldCol)) {
 				return false;
 			}
 			nbDestination = oldRow - row;
 			direction = "haut gauche";
-		}
-
-		if (oldRow > row && oldCol < col) {
+		} else if (oldRow > row && oldCol < col) {
 			if (!(oldRow - row  == col - oldCol)) {
 				return false;
 			}
 			nbDestination = oldRow - row;
 			direction = "haut droite";
-		}
-
-		if (oldRow < row && oldCol > col) {
+		} else {
 			if (!(row - oldRow  == oldCol - col)) {
 				return false;
 			}
@@ -66,7 +66,7 @@ public class Fou extends Piece {
 		}
 		
 		if (direction.equals("bas droite")) {
-			for (int i = oldRow + 1, j = oldCol + 1, compteur = 0; compteur < nbDestination; i++, j++, compteur++) {
+			for (int i = oldRow + 1, j = oldCol + 1, compteur = 0; compteur < nbDestination - 1; i++, j++, compteur++) {
 				if (p.getPiece(i, j) != null) {
 					return false;
 				}
@@ -74,7 +74,7 @@ public class Fou extends Piece {
 		}
 
 		if (direction.equals("haut gauche")) {
-			for (int i = oldRow - 1, j = oldCol - 1, compteur = 0; compteur < nbDestination; i--, j--, compteur++) {
+			for (int i = oldRow - 1, j = oldCol - 1, compteur = 0; compteur < nbDestination - 1; i--, j--, compteur++) {
 				if (p.getPiece(i, j) != null) {
 					return false;
 				}
@@ -82,7 +82,7 @@ public class Fou extends Piece {
 		}
 		
 		if (direction.equals("haut droite")) {
-			for (int i = oldRow - 1, j = oldCol + 1, compteur = 0; compteur < nbDestination; i--, j++, compteur++) {
+			for (int i = oldRow - 1, j = oldCol + 1, compteur = 0; compteur < nbDestination - 1; i--, j++, compteur++) {
 				if (p.getPiece(i, j) != null) {
 					return false;
 				}
@@ -90,7 +90,7 @@ public class Fou extends Piece {
 		}
 
 		if (direction.equals("bas gauche")) {
-			for (int i = oldRow + 1, j = oldCol - 1, compteur = 0; compteur < nbDestination; i++, j--, compteur++) {
+			for (int i = oldRow + 1, j = oldCol - 1, compteur = 0; compteur < nbDestination - 1; i++, j--, compteur++) {
 				if (p.getPiece(i, j) != null) {
 					return false;
 				}
