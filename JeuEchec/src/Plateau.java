@@ -69,7 +69,7 @@ public class Plateau {
             plateau[j][6].setPiece(new Cavalier(i));
             plateau[j][7].setPiece(new Tour(i));
         }
-        plateau[3][3].setPiece(new Cavalier(1));
+
         // Initialise hashmap, les lettres et numéros du plateau sont liés 
         // aux positions "code". A8 devient plateau[0][0]
         for (Integer i = 0; i < aCol.length; i++) {
