@@ -31,6 +31,8 @@ public class Jeu {
 		Integer player = 0;
 
 		while (checkKings(p).equals(2)){
+			pionNbCase(p);
+			
 			p.displayPlateau();
 
 			if (player.equals(0)) {
@@ -65,5 +67,18 @@ public class Jeu {
         }
 		
         return compteur;
+	}
+	
+	public void pionNbCase(Plateau p) {
+
+        for(int i = 0; i < p.getPlateau().length; i++) {
+            for(int j = 0; j < p.getPlateau().length; j++) {
+            	if (i > 1 && i < 6) {
+                    if (p.getPiece(i, j) != null && p.getPiece(i, j).getName().equals("Pion")) {
+                    	p.getPiece(i, j).setNbCase(1);
+                    }
+            	}           	            	
+            }
+        }
 	}
 }

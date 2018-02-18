@@ -40,10 +40,11 @@ public class Deplacement {
 								}
 							}
 						}
-					}			
+					}
 				}
 			}
 		}
+		
 		if (!checkDeplacement) {
 			System.out.println("Mauvaise commande");
 			deplacement(p, player);			
