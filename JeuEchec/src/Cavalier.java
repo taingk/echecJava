@@ -11,7 +11,6 @@ public class Cavalier extends Piece {
 		}
 		
 		String direction = null;
-		Integer nbDestination = null;
 
 		if (oldRow + 2 == row) {
 			if (oldCol + 1 == col) {
