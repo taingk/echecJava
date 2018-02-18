@@ -55,7 +55,6 @@ public class Roi extends Piece {
 			System.out.println("C'est un allié");
 		}
 				
-		System.out.println("Collision");
 		return false;
 	}    
 }

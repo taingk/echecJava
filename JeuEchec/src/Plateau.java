@@ -95,18 +95,19 @@ public class Plateau {
             {
                 if (plateau[i][j].getPiece() != null) {
                     sign = plateau[i][j].getPiece().getName().substring(0, 3);
-                    System.out.printf("[%s]", sign);
+                    Integer team = getPiece(i, j).getTeam() + 1;
+                    System.out.printf("[%d%s]", team, sign);
                 } else {
-                    System.out.print("[   ]");
+                    System.out.print("[    ]");
                 }
             }
             System.out.println();
 
             // Affiche les lettres par colonnes
             if (i.equals(7)) {
-                System.out.print("  ");
+                System.out.print(" ");
                 for (int k = 0; k < aCol.length; k++) {
-                    System.out.printf("  %s  ", aCol[k]);
+                    System.out.printf("   %s  ", aCol[k]);
                 }
             }
         }

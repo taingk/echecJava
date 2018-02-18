@@ -1,7 +1,6 @@
 public class Pion extends Piece {
 	public Pion(int team, Integer nbCase) {
 		super("Pion", team, nbCase);
-
 	}
 
 	@Override
