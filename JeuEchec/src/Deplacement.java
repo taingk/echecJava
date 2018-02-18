@@ -2,11 +2,11 @@ public class Deplacement {
 
 	private boolean checkDeplacement = false;
 	
-	public void deplacement(Plateau p) {
+	public void deplacement(Plateau p, Integer player) {
 
 		Input input = new Input();
 		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
-
+		
 		// Check si la commande rentree est une string de 2 caracteres
 		if (deplacement.length() == 2) {
 			String colInput = deplacement.substring(0, 1);
@@ -37,8 +37,7 @@ public class Deplacement {
 									
 								} else {
 									System.out.println("Mauvaise commande");
-									deplacement(p);
-									
+									deplacement(p, player);
 								}
 							}
 						}
@@ -48,7 +47,7 @@ public class Deplacement {
 		}
 		if (!checkDeplacement) {
 			System.out.println("Mauvaise commande");
-			deplacement(p);			
+			deplacement(p, player);			
 		}
 	}
 }

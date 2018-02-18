@@ -47,7 +47,7 @@ public class Tour extends Piece {
 							return true;
 					}
 					// Bloque devant lui
-					System.out.println("Collision en face");
+					System.out.println("Vous avez rencontre un obstacle");
 					return false;
 				}				
 			} else if (destination.equals("col") && row.equals(oldRow)) {
@@ -61,13 +61,13 @@ public class Tour extends Piece {
 							return true;
 					}
 					// Bloque devant lui
-					System.out.println("Collision en face");
+					System.out.println("Vous avez rencontre un obstacle");
 					return false;
 				}
 			}
 			
 		} else {
-			System.out.println("Collision");
+			System.out.println("Vous avez rencontre un obstacle");
 			return false;
 		}
 		return false;
