@@ -42,8 +42,13 @@ public class Piece {
 		return false;
 	}
 
-	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination, HashMap<String, Integer> hDirection) {
+	public boolean checkTrajectoire(Plateau p, Integer oldRow, Integer oldCol, Integer nbDestination, HashMap<String, String> hDirection) {
 		return false;
 	}
+	
+	public boolean checkTrajectoire(Plateau p, Integer oldRow, Integer oldCol, Integer nbDestination, String direction) {
+		return false;
+	}
+
 
 }
