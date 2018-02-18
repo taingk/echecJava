@@ -55,12 +55,10 @@ public class Plateau {
         // Place les pions sur le plateau ligne 1 et 6 pour les team 0 et 1
         for (int i = 0; i < plateau.length; i++) {
             plateau[1][i].setPiece(new Pion(0, 2));
-            plateau[6][i].setPiece(new Pion(0, 2));
-            
-        }
-        plateau[5][1].setPiece(new Tour(1));
-        
 
+            plateau[6][i].setPiece(new Pion(1, 2));
+        }
+        
         // Place les pièces restantes pour les teams 0 et 1
         for (int i = 0, j = 0; i < 2; i++, j = j + 7) {
             plateau[j][0].setPiece(new Tour(i));

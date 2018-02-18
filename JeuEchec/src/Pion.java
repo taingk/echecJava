@@ -1,6 +1,4 @@
 public class Pion extends Piece {
-	Integer finalPos;
-
 	public Pion(int team, Integer nbCase) {
 		super("Pion", team, nbCase);
 
@@ -24,20 +22,18 @@ public class Pion extends Piece {
 							return true;
 						} else {
 							// Mange en diagonale l'ennemie
-							if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) && !(col).equals(oldCol)) {
+							if (p.getPiece(oldRow + nbDestination, col) != null && p.getPiece(oldRow + nbDestination, col).getTeam().equals(1) &&
+								(col).equals(oldCol + 1) || (col).equals(oldCol - 1)) {
 									return true;
 							}
 							// Bloque devant lui
 							System.out.println("Collision en face");
-							return false;
 						}
 					} else {
 						System.out.println("Collision");
-						return false;
 					}
 				} else {
 					System.out.println("Votre nombre de case est limite");				
-					return false;
 				}	
 			}
 		} else {
@@ -52,32 +48,29 @@ public class Pion extends Piece {
 							return true;
 						} else {
 							// Mange en diagonale l'ennemie
-							if (p.getPiece(oldRow - nbDestination, col) != null && p.getPiece(oldRow - nbDestination, col).getTeam().equals(0) && !(col).equals(oldCol)) {
+							if (p.getPiece(oldRow - nbDestination, col) != null && p.getPiece(oldRow - nbDestination, col).getTeam().equals(0) && 
+								(col).equals(oldCol + 1) || (col).equals(oldCol - 1)) {
 								return true;
 							}
 							// Bloque devant lui
 							System.out.println("Collision en face");
-							return false;
 						}
 					} else {
 						System.out.println("Collision");
-						return false;
 					}
 				} else {
 					System.out.println("Votre nombre de case est limite");				
-					return false;
 				}
 			}
 		}
+		
 		System.out.println("Deplacement impossible");
 		return false;
 	}
 	
 	@Override
 	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination) {
-		if (nbDestination.equals(1)) {
-			return true;
-		}
+		Integer finalPos;
 		
 		if (team.equals(0)) {
 			finalPos = oldRow + nbDestination;

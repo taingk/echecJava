@@ -8,33 +8,33 @@ public class Tour extends Piece {
 	}
 	
 	public boolean checkValidDeplacement(Plateau p, Integer row, Integer col, Integer oldRow, Integer oldCol) {
-	    HashMap<String, Integer> hDirection = new HashMap<>();
+	    HashMap<String, String> hDirection = new HashMap<>();
 		Integer nbDestination;
 		String destination;
 		
 		if (!col.equals(oldCol)) {
 			if (col > oldCol) {
 				nbDestination = col - oldCol;
-				hDirection.put("col", 2);
+				hDirection.put("col", "droite");
 			} else {
 				nbDestination = oldCol - col;
-				hDirection.put("col", 4);
+				hDirection.put("col", "gauche");
 			}
 			destination = "col";
 		} else {
 
 			if (row > oldRow) {
 				nbDestination = row - oldRow;
-				hDirection.put("row", 3);
+				hDirection.put("row", "bas");
 			} else {
 				nbDestination = oldRow - row;
-				hDirection.put("row", 1);
+				hDirection.put("row", "haut");
 			}
 			destination = "row";
 		}
 
 		//Check si obstacle dans la trajectoire
-		if (this.checkTrajectoire(p, this.getTeam(), oldRow, oldCol, nbDestination, hDirection)) {
+		if (this.checkTrajectoire(p, oldRow, oldCol, nbDestination, hDirection)) {
 
 			if (destination.equals("row") && col.equals(oldCol)) {
 
@@ -48,7 +48,6 @@ public class Tour extends Piece {
 					}
 					// Bloque devant lui
 					System.out.println("Vous avez rencontre un obstacle");
-					return false;
 				}				
 			} else if (destination.equals("col") && row.equals(oldRow)) {
 
@@ -61,28 +60,27 @@ public class Tour extends Piece {
 							return true;
 					}
 					// Bloque devant lui
+
 					System.out.println("Vous avez rencontre un obstacle");
-					return false;
 				}
 			}
 			
-		} else {
-			System.out.println("Vous avez rencontre un obstacle");
-			return false;
-		}
+		} 
+		
+		System.out.println("Collision");
 		return false;
 	}
 
-	public boolean checkTrajectoire(Plateau p, Integer team, Integer oldRow, Integer oldCol, Integer nbDestination, HashMap<String, Integer> hDirection) {
+	public boolean checkTrajectoire(Plateau p, Integer oldRow, Integer oldCol, Integer nbDestination, HashMap<String, String> hDirection) {
 
 		if (hDirection.containsKey("col")) {
-			if (hDirection.get("col") == 2) {
+			if (hDirection.get("col") == "droite") {
 				finalPos = oldCol + nbDestination;				
 			} else {
 				finalPos = oldCol - nbDestination;
 			}
 			
-			if (hDirection.get("col") == 2) {
+			if (hDirection.get("col") == "droite") {
 				for (int i = oldCol + 1; i < finalPos; i++) {
 					if (p.getPiece(oldRow, i) != null) {
 						return false;
@@ -97,14 +95,14 @@ public class Tour extends Piece {
 			}
 
 		} else {
-			if (hDirection.get("row") == 3) {
+			if (hDirection.get("row") == "bas") {
 				finalPos = oldRow + nbDestination;
 			} else {
 				finalPos = oldRow - nbDestination;
 				System.out.print(oldRow + " " + nbDestination);
 			}
 			
-			if (hDirection.get("row") == 3) {
+			if (hDirection.get("row") == "bas") {
 				for (int i = oldRow + 1; i < finalPos; i++) {
 					if (p.getPiece(i, oldCol) != null) {
 						return false;
