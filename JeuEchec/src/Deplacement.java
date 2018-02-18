@@ -3,7 +3,7 @@ public class Deplacement {
 	public void deplacement(Plateau p, Integer player) {
 		boolean checkDeplacement = false;
 		Input input = new Input();
-		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :");
+		String deplacement = input.getInput("Veuillez saisir la piece deplacer sous forme A8 (Lettre majuscule et chiffre) :", player);
 		
 		// Check si la commande rentree est une string de 2 caracteres
 		if (deplacement.length() == 2) {
@@ -14,8 +14,8 @@ public class Deplacement {
 				Integer oldCol = p.getHCol().get(colInput);
 				Integer oldRow = p.getHRow().get(rowInput);
 				
-				if (p.getPiece(oldRow, oldCol) != null) {
-					deplacement = input.getInput("Veuillez saisir la nouvelle position sous forme A8 (Lettre majuscule et chiffre) :");
+				if (p.getPiece(oldRow, oldCol) != null && p.getPiece(oldRow, oldCol).getTeam().equals(player)) {
+					deplacement = input.getInput("Veuillez saisir la nouvelle position sous forme A8 (Lettre majuscule et chiffre) :", player);
 
 					if (deplacement.length() == 2) {
 						colInput = deplacement.substring(0, 1);

@@ -10,4 +10,11 @@ public class Input {
         return input.nextLine();
     }
 
+    public String getInput(String message, Integer player) {
+    	System.out.println();
+        System.out.println(message);
+        System.out.print("Joueur " + (player + 1) +" > ");
+        return input.nextLine();
+    }
+
 }

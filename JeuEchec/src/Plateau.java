@@ -51,14 +51,11 @@ public class Plateau {
                 plateau[i][j] = new Case();
             }
         }
-
-        plateau[3][3].setPiece(new Fou(0));
-
         
         // Place les pions sur le plateau ligne 1 et 6 pour les team 0 et 1
         for (int i = 0; i < plateau.length; i++) {
-            plateau[5][i].setPiece(new Pion(1, 2));
-            plateau[1][i].setPiece(new Pion(1, 2));
+            plateau[1][i].setPiece(new Pion(0, 2));
+            plateau[6][i].setPiece(new Pion(1, 2));
         }
         
         // Place les pièces restantes pour les teams 0 et 1
@@ -72,7 +69,7 @@ public class Plateau {
             plateau[j][6].setPiece(new Cavalier(i));
             plateau[j][7].setPiece(new Tour(i));
         }
-
+        plateau[3][3].setPiece(new Cavalier(1));
         // Initialise hashmap, les lettres et numéros du plateau sont liés 
         // aux positions "code". A8 devient plateau[0][0]
         for (Integer i = 0; i < aCol.length; i++) {
